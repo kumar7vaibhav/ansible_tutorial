@@ -5,12 +5,14 @@
   pre_tasks:
 # Pre Tasks - to check the update on each VM.
   - name: install updates (RedHat)    # Name to display when the playbook runs
+    tags: always
     yum:
       update_only: yes
       update_cache: yes
     when: ansible_distribution == "RedHat"    # Where to run this section
 
   - name: install updates (Ubuntu)
+    tags: always
     apt:
       upgrade: dist
       update_cache: yes
@@ -22,6 +24,7 @@
   tasks:
 
   - name: install httpd package (RedHat)
+    tags: apache,rhel,httpd
     yum:
       name:
         - httpd
@@ -30,6 +33,7 @@
     when: ansible_distribution == "RedHat"
 
   - name: install apache2 package (Ubuntu)
+    tags: apache,ubuntu,httpd
     apt:
       name:
         - apache2
@@ -43,12 +47,14 @@
   tasks:
 
   - name: install mariadb server package (RedHat)
+    tags: rhel,db,mariadb
     yum:
       name: mariadb
       state: latest
     when: ansible_distribution == "RedHat"
 
   - name: install mariadb server
+    tags: ubuntu,db,mariadb
     apt:
       name: mariadb-server
       state: latest
@@ -56,7 +62,6 @@
 
 # Tasks based on groups defined in inventory
 - hosts: file_servers
-  tags: samba
   become: true
   tasks:
 
