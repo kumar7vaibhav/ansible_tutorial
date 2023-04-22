@@ -33,3 +33,32 @@ kvaibhav@VM1:~$ curl 10.32.53.5
     </body>
 </html>
 ```
+
+# Uzip and Install Terraform
+
+```
+ - hosts: workstations
+   become: true
+   tasks:
+
+   - name: install unzip
+     package:
+       name: unzip
+ 
+   - name: install terraform
+     unarchive:
+      src: https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
+       dest: /usr/local/bin
+       remote_src: yes
+       mode: 0755
+       owner: root
+       group: root
+```
+Output
+```
+TASK [install unzip] ****************************************************************************
+changed: [10.32.53.4]
+
+TASK [install terraform] ************************************************************************
+changed: [10.32.53.4]
+```
