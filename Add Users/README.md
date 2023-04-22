@@ -57,3 +57,15 @@ Dependencies resolved.
 Nothing to do.
 Complete!
 ```
+
+# Using Remote User
+Change the `ansible.cfg`
+```
+[defaults]
+inventory = inventory
+private_key_file = ~/.ssh/ansible/ansible
+remote_user = alpha
+```
+Now run `ansible-playbook adding_users.yaml`
+You no longer need the `--ask-become-pass`
+
