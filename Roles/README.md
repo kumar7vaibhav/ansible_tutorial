@@ -14,7 +14,10 @@ kvaibhav@VM0:~/ansible1/roles$ tree
 │   └── tasks   
 └── workstations
     └── tasks   
+
 ```
+# Roles Playbook
+We will refactor all the code in our sites.yaml file into smalller roles and refer those roles in the main file i.e. `sites.yaml`
 
 # Create Tasks
 1. Start by making a main file in each sub-directories
