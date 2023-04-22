@@ -18,15 +18,30 @@
       update_cache: yes
     when: ansible_distribution == "Ubuntu"
 
+# Add the user and make it Sudoer
 - hosts: all
   become: true
   tasks:
-
+  # User Defined
   - name: create alpha user
     tags: always
     user:
       name: alpha
       group: root
+  # User key added
+  - name: add ssh key for alpha
+    tags: always
+    authorized_key:
+      user: alpha
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILYzaKsIpIxMxypOkNommg53oSWCkZhxWa+40NYVpn6T ansible"
+  # Make alpha sudo/root
+  - name: add sudoers file for alpha
+    copy: 
+      src: sudoer_alpha
+      dest: /etc/sudoers.d/alpha
+      owner: root
+      group: root
+      mode: 0440
 
 # Installing Terraform on current workstation
 - hosts: workstations
