@@ -16,7 +16,7 @@
       update_cache: yes
     when: ansible_distribution == "Ubuntu"
 
-
+# Tasks based on groups defined in inventory
 - hosts: web_servers
   become: true
   tasks:
